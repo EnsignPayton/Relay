@@ -3,6 +3,7 @@
 ## Version: 1.0.0
 ## Title: Relay
 ## Notes: Guild chat enhancement AddOn for World of Warcraft.
+## SavedVariables: RelayDB
 
 embeds.xml
 
