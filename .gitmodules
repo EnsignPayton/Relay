@@ -1,0 +1,3 @@
+[submodule "Ace3"]
+	path = Ace3
+	url = git://github.com/EnsignPayton/Ace3.git
