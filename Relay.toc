@@ -4,3 +4,7 @@
 ## Title: Relay
 ## Notes: Guild chat enhancement AddOn for World of Warcraft.
 
+embeds.xml
+
+Main.lua
+
