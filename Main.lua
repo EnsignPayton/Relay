@@ -3,12 +3,12 @@
 --
 
 Relay = LibStub("AceAddon-3.0"):NewAddon("Relay", 
-	"AceConsole-3.0", "AceComm-3.0")
-
+	"AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
 
 function Relay:OnInitialize()
 	self:RegisterComm("Relay")
 	self:RegisterChatCommand("relay", "SlashCommand")
+	self:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT", "AutoGrats")
 end
 
 function Relay:OnEnable()
@@ -47,5 +47,13 @@ end
 
 function Relay:PrintHelp()
 	self:Print("This is a help message.")
+end
+
+--------------------------------------------------------------------------------
+-- Auto-Grats Support
+--
+
+function Relay:AutoGrats()
+	SendChatMessage("Grats!", "GUILD")
 end
 
