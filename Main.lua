@@ -7,7 +7,8 @@ Relay = LibStub("AceAddon-3.0"):NewAddon("Relay",
 
 
 function Relay:OnInitialize()
-	Relay:RegisterComm("Relay")
+	self:RegisterComm("Relay")
+	self:RegisterChatCommand("relay", "SlashCommand")
 end
 
 function Relay:OnEnable()
@@ -17,7 +18,7 @@ function Relay:OnDisable()
 end
 
 --------------------------------------------------------------------------------
--- AceComm Support
+-- Echo Support
 --
 
 function Relay:SendEcho(message)
@@ -30,4 +31,21 @@ function Relay:OnCommReceived(prefix, message, distribution, sender)
 	SendChatMessage(result, distribution)
 end
 
+--------------------------------------------------------------------------------
+-- Slash Command Handling
+--
+
+function Relay:SlashCommand(input)
+	-- Grab the first word (control selector)
+	local command, remainder = string.match(input, "(%w+)(.+)")
+	if (command == "echo" and remainder ~= "") then
+		self:SendEcho(remainder)
+	else
+		self:PrintHelp()
+	end
+end
+
+function Relay:PrintHelp()
+	self:Print("This is a help message.")
+end
 
