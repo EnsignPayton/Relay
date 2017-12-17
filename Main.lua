@@ -4,9 +4,13 @@
 
 Relay = LibStub("AceAddon-3.0"):NewAddon("Relay", 
 	"AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
+Relay.Title = GetAddOnMetadata("Relay", "Title")
+Relay.Author = GetAddOnMetadata("Relay", "Author")
+Relay.Version = GetAddOnMetadata("Relay", "Version")
 
 function Relay:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("RelayDB")
+	--self.db = LibStub("AceDB-3.0"):New("RelayDB")
+	self:InitializeOptions()
 	self:RegisterComm("Relay")
 	self:RegisterChatCommand("relay", "SlashCommand")
 	self:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT", "AutoGrats")
