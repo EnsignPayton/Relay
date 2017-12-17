@@ -5,8 +5,12 @@
 Relay = LibStub("AceAddon-3.0"):NewAddon("Relay", 
 	"AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
 Relay.Title = GetAddOnMetadata("Relay", "Title")
+Relay.Notes = GetAddOnMetadata("Relay", "Notes")
 Relay.Author = GetAddOnMetadata("Relay", "Author")
 Relay.Version = GetAddOnMetadata("Relay", "Version")
+Relay.Locale = LibStub("AceLocale-3.0"):GetLocale("Relay", true)
+
+local L = Relay.Locale
 
 function Relay:OnInitialize()
 	--self.db = LibStub("AceDB-3.0"):New("RelayDB")
@@ -51,13 +55,12 @@ function Relay:SlashCommand(input)
 	end
 end
 
--- TODO: Remove if we use AceConfig
 Relay.CmdList = {
-	echo = "Echoes a message across the guild"
+	echo = L["Echo Desc"]
 }
 
 function Relay:PrintHelp()
-	local helpMessage = "Guild chat enhancement."
+	local helpMessage = Relay.Notes
 	for key, value in pairs(Relay.CmdList) do
 		helpMessage = helpMessage .. "\n|cffffff78" .. key .. "|r - " .. value
 	end
