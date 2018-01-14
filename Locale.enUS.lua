@@ -19,8 +19,7 @@ L["Gear Conf"] = "Queried guild for gear info."
 -- Command Error Messages
 L["Gear Error"] = "Type %s is not supported."
 
-L["Echo Toggle"] = "Enable Echo"
-L["Echo Toggle Desc"] = "Enable automatic guild message echoing"
 
+L["Echo Toggle"] = "Enable Echo"
 L["Grats Toggle"] = "Enable Auto Grats"
-L["Grats Toggle Desc"] = "Enable automatic contratulations message for guild achievements"
+L["Grats Desc"] = "Automatic congratulation messaging"

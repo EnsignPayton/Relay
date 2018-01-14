@@ -13,7 +13,6 @@ Relay.Locale = LibStub("AceLocale-3.0"):GetLocale("Relay", true)
 local L = Relay.Locale
 
 function Relay:OnInitialize()
-	--self.db = LibStub("AceDB-3.0"):New("RelayDB")
 	self:InitializeOptions()
 	self:RegisterComm("Relay")
 	self:RegisterChatCommand("relay", "SlashCommand")
