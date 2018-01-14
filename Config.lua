@@ -65,6 +65,13 @@ function Relay:GetOptions()
 						get = function(info) return self.db.profile.expEnable end,
 						set = function(info, value) self.db.profile.expEnable = value end
 					},
+					repEnable = {
+						order = 2,
+						type = "toggle",
+						name = L["Rep Toggle"],
+						get = function(info) return self.db.profile.repEnable end,
+						set = function(info, value) self.db.profile.repEnable = value end
+					},
 					achPtsEnable = {
 						order = 3,
 						type = "toggle",

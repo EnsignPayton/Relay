@@ -39,6 +39,8 @@ function Relay:SlashCommand(input)
 		self:PlayTimeRequest()
 	elseif (command == "exp") then
 		self:ExperienceRequest()
+	elseif (command == "rep") then
+		self:ReputationRequest(remainder)
 	elseif (command == "achiev" and remainder == "points") then
 		self:AchievementPointsRequest()
 	elseif (command == "achiev") then
@@ -47,28 +49,36 @@ function Relay:SlashCommand(input)
 		self:GearRequest(remainder)
 	elseif (command == "config") then
 		self:OpenConfig()
-	else
+	elseif (command == "help") then
 		self:PrintHelp()
+	else
+		self:PrintBanner()
 	end
 end
 
 -- Command descriptions for help message
-Relay.CmdList = {
-	echo = L["Echo Desc"],
-	time = L["Time Desc"],
-	exp = L["Exp Desc"],
-	achiev = L["Achiev Desc"],
-	gear = L["Gear Desc"],
-	config = L["Config Desc"]
-}
+function Relay:GetCommandList()
+	local list = {
+		echo = L["Echo Desc"],
+		time = L["Time Desc"],
+		exp = L["Exp Desc"],
+		rep = L["Rep Desc"],
+		achiev = L["Achiev Desc"],
+		gear = L["Gear Desc"],
+		config = L["Config Desc"]
+	}
+	return list
+end
 
 -- Print help message
 function Relay:PrintHelp()
-	local helpMessage = Relay.Notes
-	for key, value in pairs(Relay.CmdList) do
-		helpMessage = helpMessage .. "\n|cffffff78" .. key .. "|r - " .. value
+	for key, value in pairs(self:GetCommandList()) do
+		self:Print("|cffffff78" .. key .. "|r - " .. value)
 	end
-	self:Print(helpMessage)
+end
+
+function Relay:PrintBanner()
+	self:Print(Relay.Notes .. "\n|cffffff78" .. "help" .. "|r - " .. L["Help Desc"])
 end
 
 -- Open options
@@ -95,6 +105,11 @@ end
 function Relay:ExperienceRequest()
 	self:SendCommMessage("Relay", "ExpQ", "GUILD")
 	self:Print(L["Exp Conf"])
+end
+
+function Relay:ReputationRequest(factionId)
+	self:SendCommMessage("Relay", "RepQ " .. factionId, "GUILD")
+	self:Print(L["Rep Conf"])
 end
 
 function Relay:AchievementPointsRequest()
@@ -135,6 +150,8 @@ function Relay:OnCommReceived(prefix, message, distribution, sender)
 		self:PlayTimeRespond()
 	elseif (command == "ExpQ") then
 		self:ExperienceRespond()
+	elseif (command == "RepQ") then
+		self:ReputationRespond(remainder)
 	elseif (command == "ApsQ") then
 		self:AchievementPointsRespond()
 	elseif (command == "AchQ") then
@@ -146,6 +163,8 @@ function Relay:OnCommReceived(prefix, message, distribution, sender)
 		self:PlayTimeHandle(remainder, sender)
 	elseif (command == "ExpR") then
 		self:ExperienceHandle(remainder, sender)
+	elseif (command == "RepR") then
+		self:ReputationHandle(remainder, sender)
 	elseif (command == "ApsR") then
 		self:AchievementPointsHandle(remainder, sender)
 	elseif (command == "AchR") then
@@ -184,6 +203,12 @@ function Relay:ExperienceRespond()
 	self:SendCommMessage("Relay", "ExpR " .. level .. " " .. currentXp .. " " .. maxXp, "GUILD")
 end
 
+function Relay:ReputationRespond(factionId)
+	if not self.db.profile.repEnable then return end
+	local a, b, c, d, e, value = GetFactionInfoByID(factionId)
+	self:SendCommMessage("Relay", "RepR " .. factionId .. " " .. value, "GUILD")
+end
+
 function Relay:AchievementPointsRespond()
 	if not self.db.profile.achPtsEnable then return end
 	local points = GetTotalAchievementPoints()
@@ -211,6 +236,10 @@ function Relay:PlayTimeHandle(message, sender)
 end
 
 function Relay:ExperienceHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+function Relay:ReputationHandle(message, sender)
 	self:Print(sender .. ": " ..message)
 end
 
