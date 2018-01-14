@@ -8,6 +8,7 @@ L["Time Desc"] = "Get guild member play time"
 L["Exp Desc"] = "Get guild member level and experience"
 L["Achiev Desc"] = "Get guild member achievement points (use 'points') or achievement status (use an achievement ID)"
 L["Gear Desc"] = "Get guild member GearScore (use 'GS') or average item level (use 'IL')"
+L["Config Desc"] = "Open configuration panel"
 
 -- Command Confirmations
 L["Echo Conf"] = "Echo message \"%s\" sent."
@@ -19,7 +20,12 @@ L["Gear Conf"] = "Queried guild for gear info."
 -- Command Error Messages
 L["Gear Error"] = "Type %s is not supported."
 
-
-L["Echo Toggle"] = "Enable Echo"
-L["Grats Toggle"] = "Enable Auto Grats"
+-- Options Strings
+L["Echo Toggle"] = "Echo"
+L["Grats Toggle"] = "Auto Grats"
 L["Grats Desc"] = "Automatic congratulation messaging"
+L["Time Toggle"] = "Play Time"
+L["Exp Toggle"] = "Experience"
+L["AchPts Toggle"] = "Achievement Points"
+L["AchStat Toggle"] = "Achievement Status"
+L["Gear Toggle"] = "GearScore"

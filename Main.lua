@@ -45,6 +45,8 @@ function Relay:SlashCommand(input)
 		self:AchievementStatusRequest(remainder)
 	elseif (command == "gear") then
 		self:GearRequest(remainder)
+	elseif (command == "config") then
+		self:OpenConfig()
 	else
 		self:PrintHelp()
 	end
@@ -56,7 +58,8 @@ Relay.CmdList = {
 	time = L["Time Desc"],
 	exp = L["Exp Desc"],
 	achiev = L["Achiev Desc"],
-	gear = L["Gear Desc"]
+	gear = L["Gear Desc"],
+	config = L["Config Desc"]
 }
 
 -- Print help message
@@ -66,6 +69,11 @@ function Relay:PrintHelp()
 		helpMessage = helpMessage .. "\n|cffffff78" .. key .. "|r - " .. value
 	end
 	self:Print(helpMessage)
+end
+
+-- Open options
+function Relay:OpenConfig()
+	InterfaceOptionsFrame_OpenToCategory("Relay")
 end
 
 --------------------------------------------------------------------------------
@@ -150,22 +158,26 @@ end
 
 -- Automatic Grats Message
 function Relay:AutoGrats()
+	if not self.db.profile.gratsEnable then return end
 	SendChatMessage("Grats!", "GUILD")
 end
 
 -- Echo
 function Relay:EchoRespond(message)
+	if not self.db.profile.echoEnable then return end
 	SendChatMessage(message, "GUILD")
 end
 
 -- Send Info Responses
 function Relay:PlayTimeRespond()
+	if not self.db.profile.timeEnable then return end
 	-- TODO: Get play time
 	local time = "???? ????"
 	self:SendCommMessage("Relay", "TimeR " .. time, "GUILD")
 end
 
 function Relay:ExperienceRespond()
+	if not self.db.profile.expEnable then return end
 	local level = UnitLevel("player")
 	local currentXp = UnitXP("player")
 	local maxXp = UnitXPMax("player")
@@ -173,11 +185,13 @@ function Relay:ExperienceRespond()
 end
 
 function Relay:AchievementPointsRespond()
+	if not self.db.profile.achPtsEnable then return end
 	local points = GetTotalAchievementPoints()
 	self:SendCommMessage("Relay", "ApsR " .. points, "GUILD")
 end
 
 function Relay:AchievementStatusRespond(achievementId)
+	if not self.db.profile.achStatEnable then return end
 	local id, name, points, completed = GetAchievementInfo(achievementId)
 	local result
 	if completed then result = "true" else result = "false" end
@@ -185,6 +199,7 @@ function Relay:AchievementStatusRespond(achievementId)
 end
 
 function Relay:GearRespond(type)
+	if not self.db.profile.gearEnable then return end
 	-- TODO: Get GearScore / average item level
 	local result = "????"
 	self:SendCommMessage("Relay", "GearR " .. result, "GUILD")
