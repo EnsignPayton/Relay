@@ -61,10 +61,3 @@ The format for messages are as follows:
 |Gear Response|`Relay`|`GearR`|`Type Value`
 
 [AddOn Message API Reference](http://wowprogramming.com/docs/api/SendAddonMessage)
-
-## To-Do
-
-* Fix play time
-* GearScore/Item Level integration
-* Reputation command
-* Configuration for all options
