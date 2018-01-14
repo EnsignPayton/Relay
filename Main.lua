@@ -35,8 +35,8 @@ function Relay:SlashCommand(input)
 	local command, remainder = self:SplitFirst(input)
 	if (command == "echo" and remainder ~= "") then
 		self:EchoCommand(remainder)
-	elseif (command == "time") then
-		self:PlayTimeRequest()
+	-- elseif (command == "time") then
+	-- 	self:PlayTimeRequest()
 	elseif (command == "exp") then
 		self:ExperienceRequest()
 	elseif (command == "rep") then
@@ -45,8 +45,8 @@ function Relay:SlashCommand(input)
 		self:AchievementPointsRequest()
 	elseif (command == "achiev") then
 		self:AchievementStatusRequest(remainder)
-	elseif (command == "gear") then
-		self:GearRequest(remainder)
+	-- elseif (command == "gear") then
+	-- 	self:GearRequest(remainder)
 	elseif (command == "config") then
 		self:OpenConfig()
 	elseif (command == "help") then
@@ -60,11 +60,11 @@ end
 function Relay:GetCommandList()
 	local list = {
 		echo = L["Echo Desc"],
-		time = L["Time Desc"],
+		-- time = L["Time Desc"],
 		exp = L["Exp Desc"],
 		rep = L["Rep Desc"],
 		achiev = L["Achiev Desc"],
-		gear = L["Gear Desc"],
+		-- gear = L["Gear Desc"],
 		config = L["Config Desc"]
 	}
 	return list
