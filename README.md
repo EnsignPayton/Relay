@@ -2,27 +2,63 @@
 
 Guild chat enhancement AddOn for World of Warcraft.
 
+## Installation
+
+### Release
+
+Releases will be provided manually at a later date. Here's how to install them:
+
+1. Download the ZIP archive
+2. Extract to you WoW folder
+    * Ex. `C:\\Program Files (x86)\\World of Warcraft\\Interface\\AddOns`
+3. Enable in-game
+
+### Development
+
+```bash
+# Clone the latest repository
+git clone --recursive https://github.com/EnsignPayton/Relay.git
+```
+
+Now, copy the Relay folder to the WoW directory listed above.
+
 ## Features
 
-* Guild message echoing
-* Automatic contratulations message
+The following features may be toggled on or off individually. (WIP)
 
-## TODO
+* Echo - Allow guild members to talk through your character by relaying their message through guild chat.
+* AutoGrats - Automatically congratulate guild members for receiving achievements.
 
-### Options
+The following are designed to share information between guild members without having to manually inspect or ask a guild member. They can all be toggled through three states: **Vocal**, which responds to the request in guild chat, **Silent**, which responds silently, and **Disabled**, which does not respond at all.
 
-* Use SavedVariables and AceDB to maintain state
-* Toggles for optional features
-* Configurable congratulations message
-* Create GUI for options config
+* Play Time
+* Level/Experience
+* Reputation (With a perticular faction)
+* Achievement Points
+* Achievement Status (Of a particular achievement)
+* Gear (GearScore or average item level)
 
-### Spam filter
+## Design
 
-* Configurable pattern matching for filtering
-* Configurable channels to filter
-* Possible auto-ignore for repeat offenders
+This AddOn makes heavy use of the inter-addon communication through **AceComm**.
 
-### Other
+Message parameters are space-delimited in the message body.
 
-* Localization for all user-facing strings
+The format for messages are as follows:
+
+|Feature|Header|Sub-Header|Data|Notes|
+|---|---|---|---|---|
+|Echo Command|`Relay`|`Echo`|Message Text|
+|Play Time Request|`Relay`|`TimeQ`
+|Play Time Response|`Relay`|`TimeR`|`Total Level`|Play time in seconds
+|Experience Request|`Relay`|`ExpQ`
+|Experience Response|`Relay`|`ExpR`|`Level Current Max`
+|Acievement Points Request|`Relay`|`ApsQ`
+|Achievement Points Response|`Relay`|`ApsR`|`Points`
+|Acievement Status Request|`Relay`|`AchQ`|`Achievement`
+|Achievement Status Response|`Relay`|`AchR`|`Achievement Status`| true or false
+|Gear Request|`Relay`|`GearQ`|`Type`|`GS` or `IL`
+|Gear Response|`Relay`|`GearR`|`Type Value`
+
+[AddOn Message API Reference](http://wowprogramming.com/docs/api/SendAddonMessage)
 

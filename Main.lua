@@ -26,20 +26,6 @@ end
 function Relay:OnDisable()
 end
 
---------------------------------------------------------------------------------
--- Echo Support
---
-
-function Relay:SendEcho(message)
-	self:SendCommMessage("Relay", message, "GUILD")
-	self:Print("Echo message \"" .. message .. "\" sent.")
-end
-
-function Relay:OnCommReceived(prefix, message, distribution, sender)
-	if (distribution ~= "GUILD" or sender == UnitName("player")) then return end
-	local result = message
-	SendChatMessage(result, distribution)
-end
 
 --------------------------------------------------------------------------------
 -- Slash Command Handling
@@ -55,6 +41,7 @@ function Relay:SlashCommand(input)
 	end
 end
 
+-- Might rethink this
 Relay.CmdList = {
 	echo = L["Echo Desc"]
 }
@@ -68,10 +55,25 @@ function Relay:PrintHelp()
 end
 
 --------------------------------------------------------------------------------
--- Auto-Grats Support
+-- Commands
 --
 
 function Relay:AutoGrats()
 	SendChatMessage("Grats!", "GUILD")
+end
+
+function Relay:SendEcho(message)
+	self:SendCommMessage("Relay", message, "GUILD")
+	self:Print("Echo message \"" .. message .. "\" sent.")
+end
+
+--------------------------------------------------------------------------------
+-- Message Handling
+--
+
+function Relay:OnCommReceived(prefix, message, distribution, sender)
+	if (distribution ~= "GUILD" or sender == UnitName("player")) then return end
+	local result = message
+	SendChatMessage(result, distribution)
 end
 
