@@ -40,7 +40,7 @@ The following are designed to share information between guild members without ha
 
 ## Design
 
-This AddOn makes heavy use of the inter-addon communication through **AceComm**.
+This AddOn makes heavy use of inter-addon communication through **AceComm**.
 
 Message parameters are space-delimited in the message body.
 
@@ -53,9 +53,9 @@ The format for messages are as follows:
 |Play Time Response|`Relay`|`TimeR`|`Total Level`|Play time in seconds
 |Experience Request|`Relay`|`ExpQ`
 |Experience Response|`Relay`|`ExpR`|`Level Current Max`
-|Acievement Points Request|`Relay`|`ApsQ`
+|Achievement Points Request|`Relay`|`ApsQ`
 |Achievement Points Response|`Relay`|`ApsR`|`Points`
-|Acievement Status Request|`Relay`|`AchQ`|`Achievement`
+|Achievement Status Request|`Relay`|`AchQ`|`Achievement`
 |Achievement Status Response|`Relay`|`AchR`|`Achievement Status`| true or false
 |Gear Request|`Relay`|`GearQ`|`Type`|`GS` or `IL`
 |Gear Response|`Relay`|`GearR`|`Type Value`
