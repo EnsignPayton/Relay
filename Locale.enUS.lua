@@ -10,16 +10,14 @@ L["Achiev Desc"] = "Get guild member achievement points (use 'points') or achiev
 L["Gear Desc"] = "Get guild member GearScore (use 'GS') or average item level (use 'IL')"
 
 -- Command Confirmations
-L["Echo Conf 1"] = "Echo message \""
-L["Echo Conf 2"] = "\" sent."
+L["Echo Conf"] = "Echo message \"%s\" sent."
 L["Time Conf"] = "Queried guild for play time."
 L["Exp Conf"] = "Queried guild for experience."
 L["Achiev Conf"] = "Queried guild for achievement info."
 L["Gear Conf"] = "Queried guild for gear info."
 
 -- Command Error Messages
-L["Gear Error 1"] = "Type "
-L["Gear Error 2"] = " is not supported."
+L["Gear Error"] = "Type %s is not supported."
 
 L["Echo Toggle"] = "Enable Echo"
 L["Echo Toggle Desc"] = "Enable automatic guild message echoing"

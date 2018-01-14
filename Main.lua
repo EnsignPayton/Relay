@@ -45,7 +45,7 @@ function Relay:SlashCommand(input)
 	elseif (command == "achiev") then
 		self:AchievementStatusRequest(remainder)
 	elseif (command == "gear") then
-		self:GearRequest(type)
+		self:GearRequest(remainder)
 	else
 		self:PrintHelp()
 	end
@@ -76,7 +76,7 @@ end
 -- Guild Member Echo Command
 function Relay:EchoCommand(message)
 	self:SendCommMessage("Relay", "Echo " .. message, "GUILD")
-	self:Print(L["Echo Conf 1"] .. message .. L["Echo Conf 2"])
+	self:Printf(L["Echo Conf"], message)
 end
 
 -- Guild Member Info Queries
@@ -92,7 +92,7 @@ end
 
 function Relay:AchievementPointsRequest()
 	self:SendCommMessage("Relay", "ApsQ", "GUILD")
-	self:Print(L["Aciev Conf"])
+	self:Print(L["Achiev Conf"])
 end
 
 function Relay:AchievementStatusRequest(achievementId)
@@ -101,8 +101,8 @@ function Relay:AchievementStatusRequest(achievementId)
 end
 
 function Relay:GearRequest(type)
-	if (type ~= "GS" or type ~= "IL") then
-		self:Print(L["Gear Error 1"] .. type .. L["Gear Error 2"])
+	if (type ~= "GS" and type ~= "IL") then
+		self:Printf(L["Gear Error"], type)
 		return
 	end
 
@@ -116,12 +116,14 @@ end
 
 function Relay:OnCommReceived(prefix, message, distribution, sender)
 	-- Only listen on GUILD and ignore our own messages
-	if (distribution ~= "GUILD" or sender == UnitName("player")) then return end
+	-- if (distribution ~= "GUILD" or sender == UnitName("player")) then return end
 
 	local command, remainder = self:SplitFirst(message)
 
+	-- Echo Command
 	if (command == "Echo") then
 		self:EchoRespond(remainder)
+	-- Info Requests
 	elseif (command == "TimeQ") then
 		self:PlayTimeRespond()
 	elseif (command == "ExpQ") then
@@ -132,6 +134,17 @@ function Relay:OnCommReceived(prefix, message, distribution, sender)
 		self:AchievementStatusRespond(remainder)
 	elseif (command == "GearQ") then
 		self:GearRespond(remainder)
+	-- Info Responses
+	elseif (command == "TimeR") then
+		self:PlayTimeHandle(remainder, sender)
+	elseif (command == "ExpR") then
+		self:ExperienceHandle(remainder, sender)
+	elseif (command == "ApsR") then
+		self:AchievementPointsHandle(remainder, sender)
+	elseif (command == "AchR") then
+		self:AchievementStatusHandle(remainder, sender)
+	elseif (command == "GearR") then
+		self:GearHandle(remainder, sender)
 	end
 
 end
@@ -141,36 +154,65 @@ function Relay:AutoGrats()
 	SendChatMessage("Grats!", "GUILD")
 end
 
--- Command / Request Responses
+-- Echo
 function Relay:EchoRespond(message)
 	SendChatMessage(message, "GUILD")
 end
 
+-- Send Info Responses
 function Relay:PlayTimeRespond()
 	-- TODO: Get play time
+	local time = "???? ????"
+	self:SendCommMessage("Relay", "TimeR " .. time, "GUILD")
 end
 
 function Relay:ExperienceRespond()
 	local level = UnitLevel("player")
 	local currentXp = UnitXP("player")
 	local maxXp = UnitXPMax("player")
-	self:SendCommMessage("Relay", level .. " " .. currentXp .. " " .. maxXp, "GUILD")
+	self:SendCommMessage("Relay", "ExpR " .. level .. " " .. currentXp .. " " .. maxXp, "GUILD")
 end
 
 function Relay:AchievementPointsRespond()
 	local points = GetTotalAchievementPoints()
-	self:SendCommMessage("Relay", points, "GUILD")
+	self:SendCommMessage("Relay", "ApsR " .. points, "GUILD")
 end
 
 function Relay:AchievementStatusRespond(achievementId)
 	local id, name, points, completed = GetAchievementInfo(achievementId)
-	self:SendCommMessage("Relay", completed, "GUILD")
+	local result
+	if completed then result = "true" else result = "false" end
+	self:SendCommMessage("Relay", "AchR " .. id .. " " .. result, "GUILD")
 end
 
 function Relay:GearRespond(type)
+	-- TODO: Get GearScore / average item level
 	local result = "????"
-	self:SendCommMessage("Relay", result, "GUILD")
+	self:SendCommMessage("Relay", "GearR " .. result, "GUILD")
 end
+
+-- Handle Info Responses
+function Relay:PlayTimeHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+function Relay:ExperienceHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+function Relay:AchievementPointsHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+function Relay:AchievementStatusHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+function Relay:GearHandle(message, sender)
+	self:Print(sender .. ": " ..message)
+end
+
+
 
 --------------------------------------------------------------------------------
 -- Utility Functions
@@ -204,4 +246,8 @@ function Relay:SplitFirst(input)
 		end
 	end
 	return first, rest;
+end
+
+function Relay:Printf(...)
+	self:Print(string.format(...))
 end
