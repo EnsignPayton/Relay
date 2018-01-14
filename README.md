@@ -33,7 +33,7 @@ The following are designed to share information between guild members without ha
 
 * Play Time
 * Level/Experience
-* Reputation (With a perticular faction)
+* Reputation (With a particular faction)
 * Achievement Points
 * Achievement Status (Of a particular achievement)
 * Gear (GearScore or average item level)
@@ -53,6 +53,8 @@ The format for messages are as follows:
 |Play Time Response|`Relay`|`TimeR`|`Total Level`|Play time in seconds
 |Experience Request|`Relay`|`ExpQ`
 |Experience Response|`Relay`|`ExpR`|`Level Current Max`
+|Reputation Request|`Relay`|`RepQ`|`Faction`
+|Reputation Response|`Relay`|`RepR`|`Faction Rep`
 |Achievement Points Request|`Relay`|`ApsQ`
 |Achievement Points Response|`Relay`|`ApsR`|`Points`
 |Achievement Status Request|`Relay`|`AchQ`|`AchievementID`
