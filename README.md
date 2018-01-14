@@ -55,8 +55,8 @@ The format for messages are as follows:
 |Experience Response|`Relay`|`ExpR`|`Level Current Max`
 |Achievement Points Request|`Relay`|`ApsQ`
 |Achievement Points Response|`Relay`|`ApsR`|`Points`
-|Achievement Status Request|`Relay`|`AchQ`|`Achievement`
-|Achievement Status Response|`Relay`|`AchR`|`Achievement Status`| true or false
+|Achievement Status Request|`Relay`|`AchQ`|`AchievementID`
+|Achievement Status Response|`Relay`|`AchR`|`AchievementID Status`| true or false
 |Gear Request|`Relay`|`GearQ`|`Type`|`GS` or `IL`
 |Gear Response|`Relay`|`GearR`|`Type Value`
 
