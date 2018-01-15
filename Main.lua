@@ -283,57 +283,26 @@ function Relay:ReputationHandle(message, sender)
 		rangeTitle = L["Hated"]
 		rangeMax = 36000
 	end
-
-	-- Char: Faction 10 (999 / 1000 Exalted)
+	
 	self:Printf(L["Rep Return"], sender, t[1], rangeValue, rangeMax, rangeTitle)
 end
 
 function Relay:AchievementPointsHandle(message, sender)
-	self:Print(sender .. ": " ..message)
+	self:Printf(L["Achiev Points Return"], sender, message)
 end
 
 function Relay:AchievementStatusHandle(message, sender)
-	self:Print(sender .. ": " ..message)
+	local t = self:SplitString(message, " ")
+	local status
+	if (t[2] == "true") then
+		status = L["Complete"]
+	else
+		status = L["Incomplete"]
+	end
+
+	self:Printf(L["Achiev Status Return"], sender, t[1], status)
 end
 
 function Relay:GearHandle(message, sender)
 	self:Print(sender .. ": " ..message)
-end
-
---------------------------------------------------------------------------------
--- Utility Functions
---
-
-function Relay:SplitString(input, delimiter)
-	if (delimiter == nil) then
-		delimiter = "%s"
-	end
-	local t = {}
-	local i = 1
-	for str in string.gmatch(input, "([^"..delimiter.."]+)") do
-		t[i] = str
-		i = i + 1
-	end
-	return t
-end
-
-function Relay:SplitFirst(input)
-	local split = self:SplitString(input, " ")
-	local first = ""
-	local rest = ""
-	for i, str in ipairs(split) do
-		if i == 1 then
-			first = str
-		else
-			if rest ~= "" then
-				rest = rest .. " "
-			end
-			rest = rest .. str
-		end
-	end
-	return first, rest;
-end
-
-function Relay:Printf(...)
-	self:Print(string.format(...))
 end

@@ -46,6 +46,10 @@ L["Achievement Points"] = true
 L["Achievement Status"] = true
 L["Achiev Desc"] = "Get guild member achievement points (use 'points') or achievement status (use an achievement ID)"
 L["Achiev Conf"] = "Queried guild for achievement info."
+L["Achiev Points Return"] = "%s: %s Achievement Points"
+L["Achiev Status Return"] = "%s: Achievement %s %s"
+L["Complete"] = true
+L["Incomplete"] = true
 
 -- Gear
 L["GearScore"] = true
