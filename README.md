@@ -6,7 +6,10 @@ Guild chat enhancement AddOn for World of Warcraft.
 
 ### Release
 
-Releases will be provided manually at a later date. Here's how to install them:
+* [All Releases](https://drive.google.com/open?id=1-AETVU8s-FPhZ7BOSJ6v8uhjxW0sYlaS)
+* [Latest Release](https://drive.google.com/open?id=1gSkTCFXNuzBMAakBa-DuMOeD5cbOrZvS)
+
+Here's how to install:
 
 1. Download the ZIP archive
 2. Extract to you WoW folder
