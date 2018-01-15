@@ -232,21 +232,60 @@ end
 
 -- Handle Info Responses
 function Relay:PlayTimeHandle(message, sender)
-	self:Print(sender .. ": " ..message)
+	self:Print(sender .. ": " .. message)
 end
 
 function Relay:ExperienceHandle(message, sender)
 	local t = self:SplitString(message, " ")
-	local result = "Level " .. t[1]
-	if (t[1] ~= "80") then
-		result = result .. " (" .. t[2] .. " / " .. t[3] .. ")"
+	if (t[1] == "80") then
+		self:Printf(L["Exp Return 80"], sender, t[1])
+	else
+		self:Printf(L["Exp Return"], sender, t[1], t[2], t[3])
 	end
-
-	self:Print(sender .. ": " .. result)
 end
 
 function Relay:ReputationHandle(message, sender)
-	self:Print(sender .. ": " ..message)
+	local t = self:SplitString(message, " ")
+	local value = tonumber(t[2])
+	local rangeValue
+	local rangeTitle
+	local rangeMax
+	if (value >= 42000) then
+		rangeValue = value - 42000
+		rangeTitle = L["Exalted"]
+		rangeMax = 999
+	elseif (value >= 21000) then
+		rangeValue = value - 21000
+		rangeTitle = L["Revered"]
+		rangeMax = 21000
+	elseif (value >= 9000) then
+		rangeValue = value - 9000
+		rangeTitle = L["Honored"]
+		rangeMax = 12000
+	elseif (value >= 3000) then
+		rangeValue = value - 3000
+		rangeTitle = L["Friendly"]
+		rangeMax = 6000
+	elseif (value >= 0) then
+		rangeValue = value
+		rangeTitle = L["Neutral"]
+		rangeMax = 3000
+	elseif (value >= -3000) then
+		rangeValue = value + 3000
+		rangeTitle = L["Unfriendly"]
+		rangeMax = 3000
+	elseif (value >= -6000) then
+		rangeValue = value + 6000
+		rangeTitle = L["Hostile"]
+		rangeMax = 3000
+	else
+		rangeValue = value + 42000
+		rangeTitle = L["Hated"]
+		rangeMax = 36000
+	end
+
+	-- Char: Faction 10 (999 / 1000 Exalted)
+	self:Printf(L["Rep Return"], sender, t[1], rangeValue, rangeMax, rangeTitle)
 end
 
 function Relay:AchievementPointsHandle(message, sender)
@@ -260,8 +299,6 @@ end
 function Relay:GearHandle(message, sender)
 	self:Print(sender .. ": " ..message)
 end
-
-
 
 --------------------------------------------------------------------------------
 -- Utility Functions
