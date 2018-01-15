@@ -236,7 +236,13 @@ function Relay:PlayTimeHandle(message, sender)
 end
 
 function Relay:ExperienceHandle(message, sender)
-	self:Print(sender .. ": " ..message)
+	local t = self:SplitString(message, " ")
+	local result = "Level " .. t[1]
+	if (t[1] ~= "80") then
+		result = result .. " (" .. t[2] .. " / " .. t[3] .. ")"
+	end
+
+	self:Print(sender .. ": " .. result)
 end
 
 function Relay:ReputationHandle(message, sender)

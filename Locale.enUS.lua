@@ -24,12 +24,12 @@ L["Gear Conf"] = "Queried guild for gear info."
 L["Gear Error"] = "Type %s is not supported."
 
 -- Options Strings
-L["Echo Toggle"] = "Echo"
-L["Grats Toggle"] = "Auto Grats"
+L["Echo"] = true
+L["Auto Grats"] = true
 L["Grats Desc"] = "Automatic congratulation messaging"
-L["Time Toggle"] = "Play Time"
-L["Exp Toggle"] = "Experience"
-L["Rep Toggle"] = "Reputation"
-L["AchPts Toggle"] = "Achievement Points"
-L["AchStat Toggle"] = "Achievement Status"
-L["Gear Toggle"] = "GearScore"
+L["Play Time"] = true
+L["Experience"] = true
+L["Reputation"] = true
+L["Achievement Points"] = true
+L["Achievement Status"] = true
+L["GearScore"] = true

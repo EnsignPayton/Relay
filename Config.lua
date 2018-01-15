@@ -11,11 +11,12 @@ function Relay:GetOptionDefaults()
 		profile = {
 			echoEnable = true,
 			gratsEnable = true,
-			timeEnable = true,
+			-- timeEnable = true,
 			expEnable = true,
+			repEnable = true,
 			achPtsEnable = true,
 			achStatEnable = true,
-			gearEnable = true
+			-- gearEnable = true
 		}
 	}
 	return defaults
@@ -32,7 +33,7 @@ function Relay:GetOptions()
 					echoEnable = {
 						order = 1,
 						type = "toggle",
-						name = L["Echo Toggle"],
+						name = L["Echo"],
 						desc = L["Echo Desc"],
 						get = function(info) return self.db.profile.echoEnable end,
 						set = function(info, value) self.db.profile.echoEnable = value end
@@ -40,7 +41,7 @@ function Relay:GetOptions()
 					gratsEnable = {
 						order = 2,
 						type = "toggle",
-						name = L["Grats Toggle"],
+						name = L["Auto Grats"],
 						desc = L["Grats Desc"],
 						get = function(info) return self.db.profile.gratsEnable end,
 						set = function(info, value) self.db.profile.gratsEnable = value end
@@ -51,48 +52,48 @@ function Relay:GetOptions()
 				type = "group",
 				name = "Info Requests",
 				args = {
-					timeEnable = {
-						order = 1,
-						type = "toggle",
-						name = L["Time Toggle"],
-						get = function(info) return self.db.profile.timeEnable end,
-						set = function(info, value) self.db.profile.timeEnable = value end
-					},
+					-- timeEnable = {
+					-- 	order = 1,
+					-- 	type = "toggle",
+					-- 	name = L["Play Time"],
+					-- 	get = function(info) return self.db.profile.timeEnable end,
+					-- 	set = function(info, value) self.db.profile.timeEnable = value end
+					-- },
 					expEnable = {
 						order = 2,
 						type = "toggle",
-						name = L["Exp Toggle"],
+						name = L["Experience"],
 						get = function(info) return self.db.profile.expEnable end,
 						set = function(info, value) self.db.profile.expEnable = value end
 					},
 					repEnable = {
 						order = 2,
 						type = "toggle",
-						name = L["Rep Toggle"],
+						name = L["Reputation"],
 						get = function(info) return self.db.profile.repEnable end,
 						set = function(info, value) self.db.profile.repEnable = value end
 					},
 					achPtsEnable = {
 						order = 3,
 						type = "toggle",
-						name = L["AchPts Toggle"],
+						name = L["Achievement Points"],
 						get = function(info) return self.db.profile.achPtsEnable end,
 						set = function(info, value) self.db.profile.achPtsEnable = value end
 					},
 					achStatEnable = {
 						order = 4,
 						type = "toggle",
-						name = L["AchStat Toggle"],
+						name = L["Achievement Status"],
 						get = function(info) return self.db.profile.achStatEnable end,
 						set = function(info, value) self.db.profile.achStatEnable = value end
 					},
-					gearEnable = {
-						order = 5,
-						type = "toggle",
-						name = L["Gear Toggle"],
-						get = function(info) return self.db.profile.gearEnable end,
-						set = function(info, value) self.db.profile.gearEnable = value end
-					}
+					-- gearEnable = {
+					-- 	order = 5,
+					-- 	type = "toggle",
+					-- 	name = L["GearScore"],
+					-- 	get = function(info) return self.db.profile.gearEnable end,
+					-- 	set = function(info, value) self.db.profile.gearEnable = value end
+					-- }
 				}
 			}
 		}
@@ -101,9 +102,9 @@ function Relay:GetOptions()
 end
 
 function Relay:InitializeOptions()
+	local defaults = self:GetOptionDefaults()
 	self.db = LibStub("AceDB-3.0"):New("RelayDB", defaults)
 
-	local defaults = self:GetOptionDefaults()
 	local options = self:GetOptions()
 	AC:RegisterOptionsTable("Relay", options)
 	-- ACD:AddToBlizOptions("Relay", "Relay", nil, "general")
