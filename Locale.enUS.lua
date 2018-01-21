@@ -25,7 +25,7 @@ L["Experience"] = true
 L["Exp Desc"] = "Get guild member level and experience"
 L["Exp Conf"] = "Queried guild for experience."
 L["Exp Return 80"] = "%s: Level %s"
-L["Exp Return"] = "%s: Level %s (%s / %s)"
+L["Exp Return"] = "%s: Level %s %.2f%% (%s / %s)"
 
 -- Reputation
 L["Reputation"] = true

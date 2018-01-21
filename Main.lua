@@ -240,7 +240,8 @@ function Relay:ExperienceHandle(message, sender)
 	if (t[1] == "80") then
 		self:Printf(L["Exp Return 80"], sender, t[1])
 	else
-		self:Printf(L["Exp Return"], sender, t[1], t[2], t[3])
+		local percent = 100 * tonumber(t[2]) / tonumber(t[3])
+		self:Printf(L["Exp Return"], sender, t[1], percent, t[2], t[3])
 	end
 end
 
